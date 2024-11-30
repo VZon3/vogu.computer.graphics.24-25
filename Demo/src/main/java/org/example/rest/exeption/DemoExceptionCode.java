@@ -1,4 +1,4 @@
-package org.example.exeption;
+package org.example.rest.exeption;
 
 import org.springframework.http.HttpStatus;
 
@@ -6,9 +6,7 @@ public enum DemoExceptionCode {
 
     STUDENT_NOT_EXIST( HttpStatus.BAD_REQUEST, "Студента с id %s не существует" ),
 
-    UNEXPECTED_SERVICE_ERROR( HttpStatus.INTERNAL_SERVER_ERROR, "Неизвестная ошибка сервера" ),
-
-    EXTERNAL_SERVICE_ERROR( HttpStatus.BAD_GATEWAY, "Студента с id %s не существует" );
+    UNEXPECTED_EXTERNAL_SERVICE_ERROR( HttpStatus.INTERNAL_SERVER_ERROR, "Неизвестная ошибка внешнего сервера: %s" );
 
     private final HttpStatus status;
 

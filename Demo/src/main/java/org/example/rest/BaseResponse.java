@@ -1,24 +1,22 @@
 package org.example.rest;
 
-import java.io.Serializable;
-
-public class BaseResponse {
+public class BaseResponse<TBody> {
 
     public final Boolean success;
-    public final Object body;
-    public final ErrorRs error;
+    public final TBody body;
+    public final ErrorRespose error;
 
-    private BaseResponse( Boolean success, Object body, ErrorRs error ) {
+    private BaseResponse( Boolean success, TBody body, ErrorRespose error ) {
         this.success = success;
         this.body = body;
         this.error = error;
     }
 
-    public static BaseResponse ok( Object body ) {
-        return new BaseResponse( true, body, null );
+    public static <TBody> BaseResponse<TBody> ok( TBody body ) {
+        return new BaseResponse<>( true, body, null );
     }
 
-    public static BaseResponse fail( ErrorRs error ) {
-        return new BaseResponse( false, null, error );
+    public static <TBody> BaseResponse<TBody> fail( ErrorRespose error ) {
+        return new BaseResponse<>( false, null, error );
     }
 }

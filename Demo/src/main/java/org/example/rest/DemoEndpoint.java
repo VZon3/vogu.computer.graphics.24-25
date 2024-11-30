@@ -1,8 +1,7 @@
 package org.example.rest;
 
-
-import org.example.exeption.DemoException;
-import org.example.logic.DemoService;
+import org.example.rest.exeption.DemoException;
+import org.example.behavior.DemoService;
 import org.example.rest.dto.DescriptionRq;
 import org.example.rest.dto.StudentRq;
 import org.springframework.beans.factory.annotation.Autowired;

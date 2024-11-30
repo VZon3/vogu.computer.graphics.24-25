@@ -1,7 +1,7 @@
-package org.example.logic;
+package org.example.behavior;
 
-import org.example.exeption.DemoException;
-import org.example.exeption.DemoExceptionCode;
+import org.example.rest.exeption.DemoException;
+import org.example.rest.exeption.DemoExceptionCode;
 import org.example.rest.dto.DescriptionRq;
 import org.example.rest.dto.StudentRq;
 import org.example.rest.dto.StudentRs;
@@ -18,11 +18,7 @@ public class DemoServiceImpl implements DemoService {
     @Override
     public List<StudentRs> getStudentAll() {
         return studentStorage.keySet().stream()
-                                      .map( key -> new StudentRs( key,
-                                                                  studentStorage.get( key ).name,
-                                                                  studentStorage.get( key ).age,
-                                                                  studentStorage.get( key ).nickname,
-                                                                  studentStorage.get( key ).description ) )
+                                      .map( id -> new StudentRs( id, studentStorage.get( id ) ) )
                                       .collect( Collectors.toList() ) ;
     }
 
@@ -33,10 +29,14 @@ public class DemoServiceImpl implements DemoService {
 
     @Override
     public void descriptionAdd( DescriptionRq descriptionRq ) throws DemoException {
-        if( !studentStorage.containsKey( descriptionRq.id ) )
-            throw new DemoException( DemoExceptionCode.STUDENT_NOT_EXIST, descriptionRq.id );
+        validateDescriptionRq( descriptionRq );
         StudentRq studentRq = studentStorage.get( descriptionRq.id );
         studentRq.description.addAll( descriptionRq.description );
+    }
+
+    private void validateDescriptionRq( DescriptionRq descriptionRq ) throws DemoException {
+        if( !studentStorage.containsKey( descriptionRq.id ) )
+            throw new DemoException( DemoExceptionCode.STUDENT_NOT_EXIST, descriptionRq.id );
     }
 
     @Override

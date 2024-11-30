@@ -25,4 +25,12 @@ public class StudentRs implements Serializable {
         this.nickname = nickname;
         this.description = description;
     }
+
+    public StudentRs( Integer id, StudentRq studentRq ) {
+        this.id = id;
+        this.name = studentRq.name;
+        this.age = studentRq.age;
+        this.nickname = studentRq.nickname;
+        this.description = studentRq.description;
+    }
 }

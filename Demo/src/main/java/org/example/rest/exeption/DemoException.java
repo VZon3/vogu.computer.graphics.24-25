@@ -1,8 +1,8 @@
-package org.example.exeption;
+package org.example.rest.exeption;
 
 import org.springframework.http.HttpStatus;
 
-public class DemoException extends Exception {
+public class DemoException extends RuntimeException {
 
     private final HttpStatus status;
 
