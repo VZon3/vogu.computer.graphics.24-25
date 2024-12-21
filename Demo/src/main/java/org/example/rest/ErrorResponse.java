@@ -4,11 +4,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.io.Serializable;
 
-public class ErrorRespose implements Serializable {
+public class ErrorResponse implements Serializable {
 
     public final String message;
 
-    public ErrorRespose( @JsonProperty( "message" ) String message ) {
+    public ErrorResponse( @JsonProperty( "message" ) String message ) {
         this.message = message;
     }
 }

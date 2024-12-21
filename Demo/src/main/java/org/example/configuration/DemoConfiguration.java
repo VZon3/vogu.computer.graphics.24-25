@@ -11,9 +11,8 @@ public class DemoConfiguration {
 
     @Bean
     public DemoService getDemoService( ExternalServiceProperties serviceProperties ) {
-        if( serviceProperties.getEnabled() )
-            return new ExternalDemoServiceImpl( serviceProperties );
-        return new DemoServiceImpl();
+        return serviceProperties.getEnabled() ? new ExternalDemoServiceImpl( serviceProperties )
+                                              : new DemoServiceImpl();
     }
 
 }

@@ -6,14 +6,14 @@ import org.example.rest.dto.DescriptionRq;
 import org.example.rest.dto.StudentRq;
 import org.example.rest.dto.StudentRs;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
 public class DemoServiceImpl implements DemoService {
 
-    private final Map<Integer, StudentRq> studentStorage = new HashMap<>();
+    private final Map<Integer, StudentRq> studentStorage = new ConcurrentHashMap<>();
 
     @Override
     public List<StudentRs> getStudentAll() {

@@ -14,11 +14,11 @@ public interface DemoService {
     String ADD_DESCRIPTION = "/description/add";
     String DELETE_DESCRIPTION = "/description/delete";
 
-    public List<StudentRs> getStudentAll() throws DemoException;
+    public List<StudentRs> getStudentAll();
 
     public void studentAdd( StudentRq studentRq );
 
-    public void descriptionAdd( DescriptionRq descriptionRq ) throws DemoException;
+    public void descriptionAdd( DescriptionRq descriptionRq );
 
     public void descriptionDelete( DescriptionRq descriptionRq );
 }

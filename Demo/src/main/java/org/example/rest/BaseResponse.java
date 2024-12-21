@@ -4,9 +4,9 @@ public class BaseResponse<TBody> {
 
     public final Boolean success;
     public final TBody body;
-    public final ErrorRespose error;
+    public final ErrorResponse error;
 
-    private BaseResponse( Boolean success, TBody body, ErrorRespose error ) {
+    private BaseResponse( Boolean success, TBody body, ErrorResponse error ) {
         this.success = success;
         this.body = body;
         this.error = error;
@@ -16,7 +16,7 @@ public class BaseResponse<TBody> {
         return new BaseResponse<>( true, body, null );
     }
 
-    public static <TBody> BaseResponse<TBody> fail( ErrorRespose error ) {
+    public static <TBody> BaseResponse<TBody> fail( ErrorResponse error ) {
         return new BaseResponse<>( false, null, error );
     }
 }

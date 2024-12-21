@@ -14,7 +14,7 @@ import org.springframework.web.client.RestClient;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ExternalDemoServiceImpl implements DemoService{
+public class ExternalDemoServiceImpl implements DemoService {
 
     private final String baseUrl;
 
@@ -33,16 +33,18 @@ public class ExternalDemoServiceImpl implements DemoService{
     }
 
     private <TRes> TRes sendRequest( HttpMethod method, String uri, Object body, Class<TRes> resClass ) {
-        return restClient.method( method )
-                         .uri( uri )
-                         .body( body )
-                         .retrieve()
-                         .onStatus( status -> !status.equals( HttpStatus.OK ),
-                                    ( rq, rs ) -> {
+        RestClient.RequestBodySpec request = restClient.method( method )
+                                                       .uri( uri );
+        if( body != null )
+            request.body( body );
+        return request.retrieve()
+                      .onStatus( status -> !status.equals( HttpStatus.OK ),
+                                 ( rq, rs ) -> {
                                         throw new DemoException( DemoExceptionCode.UNEXPECTED_EXTERNAL_SERVICE_ERROR,
-                                                                 rs.getBody().toString() );
-                                    } )
-                .body( resClass );
+                                        rs.getBody().toString() );
+                                                }
+                                )
+                      .body( resClass );
     }
 
     private List<StudentRs> validateAndGetStudentList( List<?> listFromResponse ) {
@@ -55,26 +57,16 @@ public class ExternalDemoServiceImpl implements DemoService{
 
     @Override
     public void studentAdd( StudentRq studentRq ) {
-        sendRequest( HttpMethod.POST, baseUrl + ADD_STUDENT, studentRq, null );
+        sendRequest( HttpMethod.POST, baseUrl + ADD_STUDENT, studentRq, String.class );
     }
 
     @Override
     public void descriptionAdd( DescriptionRq descriptionRq ) {
-        sendRequest( HttpMethod.POST, baseUrl + ADD_DESCRIPTION, descriptionRq, null );
-        restClient.post()
-                .uri( "http://26.141.131.233:8080/description/add" )
-                .body( descriptionRq )
-                .retrieve()
-                .onStatus(
-                        status -> !status.equals( HttpStatus.OK ),
-                        ( rq, rs ) -> {
-                            throw new DemoException( DemoExceptionCode.UNEXPECTED_EXTERNAL_SERVICE_ERROR,
-                                                     rs.getBody().toString() );
-                        } );
+        sendRequest( HttpMethod.POST, baseUrl + ADD_DESCRIPTION, descriptionRq, String.class );
     }
 
     @Override
     public void descriptionDelete( DescriptionRq descriptionRq ) {
-        sendRequest( HttpMethod.POST, baseUrl + DELETE_DESCRIPTION, descriptionRq, null );
+        sendRequest( HttpMethod.POST, baseUrl + DELETE_DESCRIPTION, descriptionRq, String.class );
     }
 }
