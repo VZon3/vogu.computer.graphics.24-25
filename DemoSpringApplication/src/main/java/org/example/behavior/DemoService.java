@@ -1,6 +1,5 @@
 package org.example.behavior;
 
-import org.example.rest.exeption.DemoException;
 import org.example.rest.dto.DescriptionRq;
 import org.example.rest.dto.StudentRq;
 import org.example.rest.dto.StudentRs;

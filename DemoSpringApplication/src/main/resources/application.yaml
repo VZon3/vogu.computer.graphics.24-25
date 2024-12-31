@@ -4,6 +4,6 @@ demo:
       # Флаг, отвечающий за возможность работать с внешним сервисом, реализущим DemoOpenApi( см. папку resources )
       enabled: false
       # Хост внешнего сервиса
-      host: 26.141.131.233
+      host: example.host
       # Порт внешнего сервиса
-      port: 8080
+      port: example.port

@@ -10,13 +10,13 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class DemoControllerAdvice {
 
     @ExceptionHandler( DemoException.class )
-    public ResponseEntity<?> handleDemoException( DemoException exception ){
+    public ResponseEntity<?> handleDemoException( DemoException exception ) {
         return ResponseEntity.status( exception.getStatus() )
                              .body( BaseResponse.fail( new ErrorResponse( exception.getMessage() ) ) );
     }
 
     @ExceptionHandler( Exception.class )
-    public ResponseEntity<?> handleException( Exception exception ){
+    public ResponseEntity<?> handleException( Exception exception ) {
         return ResponseEntity.status( HttpStatus.INTERNAL_SERVER_ERROR )
                              .body( BaseResponse.fail( new ErrorResponse( exception.getMessage() ) ) );
     }
