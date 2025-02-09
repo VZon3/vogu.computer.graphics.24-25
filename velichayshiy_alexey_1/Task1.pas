@@ -1,4 +1,4 @@
-﻿program EllipseTest;
+﻿program Task1;
 uses
    BGL;
 begin
