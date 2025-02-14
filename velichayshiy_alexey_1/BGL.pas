@@ -379,8 +379,6 @@ begin
    end;   
    x := 0; y := a;
    d := 2*a*a-2*b*b*a+b*b;
-   PutPixel(xc+a, yc, CC);
-   PutPixel(xc-a, yc, CC);
    while y > xt do begin
       if d<=0 then
          d := d + a*a*(2*x+5)
